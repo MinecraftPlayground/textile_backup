@@ -55,7 +55,9 @@ public class Utilities {
 		MutableText message = log.getPrefixText();
 		message.append(Text.literal(msg).formatted(Formatting.WHITE));
 
-		server.getPlayerManager().broadcast(message, MessageType.SYSTEM);
+		server.getPlayerManager().getPlayerList().forEach(player -> {
+			player.sendMessage(message);
+		});
 	}
 
 	public static String getLevelName(MinecraftServer server) {
