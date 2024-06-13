@@ -24,7 +24,7 @@
 
   "text.autoconfig.textile_backup.option.perWorldBackup": "Use separate folders for different worlds",
 
-  "text.autoconfig.textile_backup.option.path": "Path to backup folder",
+  "text.autoconfig.textile_backup.option.backupDirectoryPath": "Path to backup folder",
 
   "text.autoconfig.textile_backup.option.fileBlacklist": "Blacklisted files",
 
@@ -36,7 +36,7 @@
   "text.autoconfig.textile_backup.option.maxAge.@Tooltip": "In seconds since creation",
 
   "text.autoconfig.textile_backup.option.maxSize": "Max size of backup folder",
-  "text.autoconfig.textile_backup.option.maxSize.@Tooltip": "In KBytes",
+  "text.autoconfig.textile_backup.option.maxSize.@Tooltip": "In KiBytes",
 
   "text.autoconfig.textile_backup.option.compression": "Compression level",
   "text.autoconfig.textile_backup.option.compression.@Tooltip": "Only affects zip",
@@ -46,6 +46,9 @@
 
   "text.autoconfig.textile_backup.option.format": "Archive and compression format",
   "text.autoconfig.textile_backup.option.format.@Tooltip": "See: https://github.com/Szum123321/textile_backup/wiki/Configuration#format",
+
+  "text.autoconfig.textile_backup.option.integrityVerificationMode": "Verify backup integrity",
+  "text.autoconfig.textile_backup.option.integrityVerificationMode.@Tooltip": "DO NOT ALTER unless fully aware of consequences",
 
   "text.autoconfig.textile_backup.option.permissionLevel": "Min permission level",
 

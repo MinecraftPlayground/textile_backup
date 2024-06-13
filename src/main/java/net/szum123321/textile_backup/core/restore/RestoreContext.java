@@ -1,6 +1,6 @@
 /*
  * A simple backup mod for Fabric
- * Copyright (C) 2020  Szum123321
+ * Copyright (C)  2022   Szum123321
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,16 +22,17 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.szum123321.textile_backup.core.ActionInitiator;
+import net.szum123321.textile_backup.core.RestoreableFile;
 
 import javax.annotation.Nullable;
 
-public record RestoreContext(RestoreHelper.RestoreableFile restoreableFile,
+public record RestoreContext(RestoreableFile restoreableFile,
                              MinecraftServer server,
                              @Nullable String comment,
                              ActionInitiator initiator,
                              ServerCommandSource commandSource) {
     public static final class Builder {
-        private RestoreHelper.RestoreableFile file;
+        private RestoreableFile file;
         private MinecraftServer server;
         private String comment;
         private ServerCommandSource serverCommandSource;
@@ -43,7 +44,7 @@ public record RestoreContext(RestoreHelper.RestoreableFile restoreableFile,
             return new Builder();
         }
 
-        public Builder setFile(RestoreHelper.RestoreableFile file) {
+        public Builder setFile(RestoreableFile file) {
             this.file = file;
             return this;
         }
