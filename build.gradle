@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 archivesBaseName = project.archives_base_name
 version = "${project.mod_version}-${getMcMinor(project.minecraft_version)}"
@@ -35,8 +35,8 @@ dependencies {
 	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
 	//General compression library
-	implementation "org.apache.commons:commons-compress:1.22"
-	include "org.apache.commons:commons-compress:1.22"
+	implementation "org.apache.commons:commons-compress:1.26.1"
+	include "org.apache.commons:commons-compress:1.26.1"
 
 	//LZMA support
 	implementation 'org.tukaani:xz:1.9'
