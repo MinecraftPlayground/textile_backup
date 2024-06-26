@@ -4,17 +4,17 @@
 [![Github](https://img.shields.io/github/stars/Szum123321/textile_backup?style=social) ![Github](https://img.shields.io/github/v/release/Szum123321/textile_backup?style=plastic)](https://github.com/Szum123321/textile_backup)
 
 ## What is it?
-Textile Backup porvides a way to automatically make a backup of your world, zip it and even bring it back later, replacing your old world, all without leaving the game. 
+Textile Backup provides a way to automatically make a backup of your world, zip it and even bring it back later, replacing your old world, all without leaving the game. 
 
 ------------
 ### List of features
 - Multithreaded compression: backups are made much faster than with other mods.
-- Multiple compression formats: performace can be tuned to your preference
-- It's super easy to bring back an old verion of your world (Requires server restart)
+- Multiple compression formats: performance can be tuned to your preference
+- It's super easy to bring back an old version of your world (Requires server restart)
 - Built-in management features: you can whitelist/blacklist players' access to txb commands
 - Automatic deletion of old files (Age-, Number- and Size- based)
 - Highly configurable: [Wiki](https://github.com/Szum123321/textile_backup/wiki/Configuration)
-- Fully server-sided: all features are available even if it's only peresent on the server
+- Fully server-sided: all features are available even if it's only present on the server
 
 ### [**Installation Guide**](https://github.com/Szum123321/textile_backup/wiki/Installation)  
 ### [**Usage Guide**](https://github.com/Szum123321/textile_backup/wiki/Usage)
