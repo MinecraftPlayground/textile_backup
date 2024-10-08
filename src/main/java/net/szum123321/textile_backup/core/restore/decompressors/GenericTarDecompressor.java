@@ -27,7 +27,7 @@ import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -48,7 +48,7 @@ public class GenericTarDecompressor {
              TarArchiveInputStream archiveInputStream = new TarArchiveInputStream(compressorInputStream)) {
             TarArchiveEntry entry;
 
-            while ((entry = archiveInputStream.getNextTarEntry()) != null) {
+            while ((entry = archiveInputStream.getNextEntry()) != null) {
                 if(!archiveInputStream.canReadEntryData(entry))
                     throw new IOException("Couldn't read archive entry! " + entry.getName());
 
@@ -87,7 +87,7 @@ public class GenericTarDecompressor {
             inputStream.mark(tarHeader.length);
 
             try {
-                signatureLength = IOUtils.readFully(inputStream, tarHeader);
+                signatureLength = org.apache.commons.compress.utils.IOUtils.readFully(inputStream, tarHeader);
                 inputStream.reset();
             } catch (IOException e1) {
                 throw new CompressorException("IOException while reading tar signature", e1);

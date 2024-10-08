@@ -25,7 +25,7 @@ import net.szum123321.textile_backup.core.Utilities;
 import net.szum123321.textile_backup.core.digest.HashingOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.file.Files;
