@@ -18,8 +18,6 @@
 
 package net.szum123321.textile_backup.core.create.compressors;
 
-import net.szum123321.textile_backup.TextileBackup;
-import net.szum123321.textile_backup.TextileLogger;
 import net.szum123321.textile_backup.core.NoSpaceLeftOnDeviceException;
 import net.szum123321.textile_backup.core.create.ExecutableBackup;
 import net.szum123321.textile_backup.core.create.InputSupplier;
@@ -39,7 +37,6 @@ import java.util.zip.ZipEntry;
 	https://stackoverflow.com/users/2987755/dkb
 */
 public class ParallelZipCompressor extends ZipCompressor {
-	private final static TextileLogger log = new TextileLogger(TextileBackup.MOD_NAME);
 
 	//These fields are used to discriminate against the issue #51
 	private final static SimpleStackTraceElement[] STACKTRACE_NO_SPACE_ON_LEFT_ON_DEVICE = {

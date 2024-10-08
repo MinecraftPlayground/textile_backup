@@ -115,6 +115,9 @@ public class Utilities {
 	}
 
 	public static boolean isWhitelisted(Path path) {
+		if (path.getFileName().equals(Path.of("session.lock"))) return false;
+
+		if(path.getFileName().equals(Path.of(CompressionStatus.DATA_FILENAME))) return false;
 
 		return config.get().fileWhitelist.stream().anyMatch(path::startsWith);
 	}

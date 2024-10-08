@@ -44,7 +44,7 @@ import java.util.stream.Stream;
 public abstract class AbstractCompressor {
     private final static TextileLogger log = new TextileLogger(TextileBackup.MOD_NAME);
 
-    public void createArchive(Path inputFile, Path outputFile, ExecutableBackup ctx, int coreLimit) throws IOException, ExecutionException, InterruptedException {
+    public void createArchive(Path inputPath, Path outputFile, ExecutableBackup ctx, int coreLimit) throws IOException, ExecutionException, InterruptedException {
         Instant start = Instant.now();
 
         BrokenFileHandler brokenFileHandler = new BrokenFileHandler(); //Basically a hashmap storing files and their respective exceptions
@@ -52,10 +52,10 @@ public abstract class AbstractCompressor {
         try (OutputStream outStream = Files.newOutputStream(outputFile);
              BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outStream);
              OutputStream arc = createArchiveOutputStream(bufferedOutputStream, ctx, coreLimit);
-             Stream<Path> fileStream = Files.walk(inputFile)) {
+             Stream<Path> fileStream = Files.walk(inputPath)) {
 
             var fileList = fileStream
-                    .filter(path -> Utilities.isWhitelisted(inputFile.relativize(path)))
+                    .filter(path -> Utilities.isWhitelisted(inputPath.relativize(path)))
                     .filter(Files::isRegularFile)
                     .toList();
 
@@ -66,7 +66,7 @@ public abstract class AbstractCompressor {
                     addEntry(
                             new FileInputStreamSupplier(
                                     file,
-                                    inputFile.relativize(file).toString(),
+                                    inputPath.relativize(file).toString(),
                                     fileHashBuilder,
                                     brokenFileHandler),
                             arc
@@ -77,7 +77,7 @@ public abstract class AbstractCompressor {
                     //In Permissive mode we allow partial backups
                     if (ConfigHelper.INSTANCE.get().integrityVerificationMode.isStrict()) throw e;
                     else log.sendErrorAL(ctx, "An exception occurred while trying to compress: {}",
-                            inputFile.relativize(file).toString(), e
+                            inputPath.relativize(file).toString(), e
                     );
                 }
             }
