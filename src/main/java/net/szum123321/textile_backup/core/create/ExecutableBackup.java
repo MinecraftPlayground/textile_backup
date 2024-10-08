@@ -94,15 +94,10 @@ public record ExecutableBackup(@NotNull MinecraftServer server,
 
             log.sendInfoAL(this, "Starting backup");
 
-            Path rootPath = Utilities.getRootFolder(server);
+            Path rootPath = Utilities.getRootFolder(server).resolve(config.get().rootDirectoryPath);
             Path world = Utilities.getWorldFolder(server);
 
-            log.info("Minecraft root folder is: {}", rootPath);
-            log.info("Minecraft root folder is: {}", Path.of(""));
-            log.info("Minecraft root folder is: {}", Path.of("."));
-            log.info("Minecraft root folder is: {}", Path.of("").toAbsolutePath());
-            log.info("Minecraft root folder is: {}", Path.of(".").toAbsolutePath());
-            log.info("Minecraft root folder is: {}", Path.of("./").toAbsolutePath());
+            log.info("Minecraft root folder is: {}, world folder is: {}", rootPath, world);
             log.trace("Minecraft world is: {}", world);
 
             Files.createDirectories(outFile.getParent());
