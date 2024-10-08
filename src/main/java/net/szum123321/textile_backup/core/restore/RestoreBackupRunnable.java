@@ -32,10 +32,13 @@ import net.szum123321.textile_backup.core.restore.decompressors.ZipDecompressor;
 import net.szum123321.textile_backup.mixin.MinecraftServerSessionAccessor;
 
 import java.io.IOException;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.concurrent.FutureTask;
+import java.util.stream.Stream;
 
 /**
  * This class restores a file provided by RestoreContext.
@@ -58,7 +61,7 @@ public class RestoreBackupRunnable implements Runnable {
 
         ctx.server().stop(false);
 
-        Path worldFile = Utilities.getRootFolder();
+        Path rootPath = Utilities.getRootFolder();
         Path tmp;
 
         try {
@@ -127,9 +130,11 @@ public class RestoreBackupRunnable implements Runnable {
 
                 //Disables write lock to override world file
                 ((MinecraftServerSessionAccessor) ctx.server()).getSession().close();
-
-                Utilities.deleteDirectory(worldFile);
-                Files.move(tmp, worldFile);
+            
+                                
+                // TODO: BIG PROBLEM!
+                // Utilities.deleteDirectory(rootPath);
+                Files.move(tmp, rootPath, StandardCopyOption.REPLACE_EXISTING);
 
                 if (config.get().deleteOldBackupAfterRestore) {
                     log.info("Deleting restored backup file");
