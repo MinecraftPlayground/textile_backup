@@ -55,7 +55,7 @@ public abstract class AbstractCompressor {
              Stream<Path> fileStream = Files.walk(inputFile)) {
 
             var fileList = fileStream
-                    .filter(path -> !Utilities.isBlacklisted(inputFile.relativize(path)))
+                    .filter(path -> Utilities.isWhitelisted(inputFile.relativize(path)))
                     .filter(Files::isRegularFile)
                     .toList();
 

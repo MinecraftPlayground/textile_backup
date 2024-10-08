@@ -69,17 +69,16 @@ public class ConfigPOJO implements ConfigData {
     public String rootDirectoryPath = "./";
 
     @Comment("\nA path to the backup folder\n")
-    @SerializedName("path")
     @ConfigEntry.Gui.NoTooltip()
-    public String backupDirectoryPath = "backup/";
+    public String backupDirectoryPath = "./backup/";
 
     @Comment("""
-            \nThis setting allows you to exclude files form being backed-up.
+            \nThis setting allows you to include files form being backed-up.
             Be very careful when setting it, as it is easy corrupt your world!
             """)
     @ConfigEntry.Gui.NoTooltip()
     @ConfigEntry.Category("Create")
-    public List<String> fileBlacklist = new ArrayList<>();
+    public List<String> fileWhitelist = new ArrayList<>(Arrays.asList("world"));
 
     @Comment("\nShould backups be deleted after being restored?\n")
     @ConfigEntry.Gui.NoTooltip()

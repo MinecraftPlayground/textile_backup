@@ -64,10 +64,6 @@ public class Utilities {
 				.getWorldDirectory(World.OVERWORLD);
 	}
 
-	public static Path getRootFolder(MinecraftServer server) {
-		return Path.of("").toAbsolutePath();
-	}
-
 	public static void deleteDirectory(Path path) throws IOException {
 		Files.walkFileTree(path, new SimplePathVisitor() {
 			@Override
@@ -118,12 +114,9 @@ public class Utilities {
 		return path;
 	}
 
-	public static boolean isBlacklisted(Path path) {
-		if (path.getFileName().equals(Path.of("session.lock"))) return true;
+	public static boolean isWhitelisted(Path path) {
 
-		if(path.getFileName().equals(Path.of(CompressionStatus.DATA_FILENAME))) return true;
-
-		return config.get().fileBlacklist.stream().anyMatch(path::startsWith);
+		return config.get().fileWhitelist.stream().anyMatch(path::startsWith);
 	}
 
 	public static DateTimeFormatter getDateTimeFormatter() {

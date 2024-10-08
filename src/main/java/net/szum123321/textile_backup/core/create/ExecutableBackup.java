@@ -94,11 +94,9 @@ public record ExecutableBackup(@NotNull MinecraftServer server,
 
             log.sendInfoAL(this, "Starting backup");
 
-            Path rootPath = Utilities.getRootFolder(server).resolve(config.get().rootDirectoryPath);
-            Path world = Utilities.getWorldFolder(server);
+            Path rootPath = Path.of(config.get().rootDirectoryPath);
 
-            log.info("Minecraft root folder is: {}, world folder is: {}", rootPath, world);
-            log.trace("Minecraft world is: {}", world);
+            log.trace("Minecraft root folder is: {}", rootPath);
 
             Files.createDirectories(outFile.getParent());
             Files.createFile(outFile);
@@ -115,15 +113,15 @@ public record ExecutableBackup(@NotNull MinecraftServer server,
                 case ZIP -> {
                     if (coreCount > 1 && !Globals.INSTANCE.disableTMPFS()) {
                         log.trace("Using PARALLEL Zip Compressor. Threads: {}", coreCount);
-                        ParallelZipCompressor.getInstance().createArchive(world, outFile, this, coreCount);
+                        ParallelZipCompressor.getInstance().createArchive(rootPath, outFile, this, coreCount);
                     } else {
                         log.trace("Using REGULAR Zip Compressor.");
-                        ZipCompressor.getInstance().createArchive(world, outFile, this, coreCount);
+                        ZipCompressor.getInstance().createArchive(rootPath, outFile, this, coreCount);
                     }
                 }
-                case BZIP2 -> ParallelBZip2Compressor.getInstance().createArchive(world, outFile, this, coreCount);
-                case GZIP -> ParallelGzipCompressor.getInstance().createArchive(world, outFile, this, coreCount);
-                case TAR -> new AbstractTarArchiver().createArchive(world, outFile, this, coreCount);
+                case BZIP2 -> ParallelBZip2Compressor.getInstance().createArchive(rootPath, outFile, this, coreCount);
+                case GZIP -> ParallelGzipCompressor.getInstance().createArchive(rootPath, outFile, this, coreCount);
+                case TAR -> new AbstractTarArchiver().createArchive(rootPath, outFile, this, coreCount);
             }
 
             if(cleanup) new Cleanup(commandSource, Utilities.getLevelName(server)).call();
