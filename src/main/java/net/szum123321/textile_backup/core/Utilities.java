@@ -65,10 +65,7 @@ public class Utilities {
 	}
 
 	public static Path getRootFolder(MinecraftServer server) {
-		return Path.of(((MinecraftServerSessionAccessor)server)
-				.getSession()
-				.getDirectory()
-				.getRootPath());
+		return Path.of(System.getProperty("user.dir"));
 	}
 
 	public static void deleteDirectory(Path path) throws IOException {
