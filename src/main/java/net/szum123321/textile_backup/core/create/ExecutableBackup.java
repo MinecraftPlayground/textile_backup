@@ -94,7 +94,7 @@ public record ExecutableBackup(@NotNull MinecraftServer server,
 
             log.sendInfoAL(this, "Starting backup");
 
-            Path rootPath = Path.of(config.get().rootDirectoryPath);
+            Path rootPath = Utilities.getRootFolder();
 
             log.trace("Minecraft root folder is: {}", rootPath);
 

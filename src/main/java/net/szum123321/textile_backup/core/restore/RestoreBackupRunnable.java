@@ -58,8 +58,8 @@ public class RestoreBackupRunnable implements Runnable {
 
         ctx.server().stop(false);
 
-        Path worldFile = Utilities.getWorldFolder(ctx.server()),
-                tmp;
+        Path worldFile = Utilities.getRootFolder();
+        Path tmp;
 
         try {
             tmp = Files.createTempDirectory(

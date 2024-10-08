@@ -77,7 +77,7 @@ public class ConfigPOJO implements ConfigData {
             """)
     @ConfigEntry.Gui.NoTooltip()
     @ConfigEntry.Category("Create")
-    public List<String> fileWhitelist = new ArrayList<>(Arrays.asList("world"));
+    public List<String> fileWhitelist = new ArrayList<>(Arrays.asList("./world/"));
 
     @Comment("\nShould backups be deleted after being restored?\n")
     @ConfigEntry.Gui.NoTooltip()

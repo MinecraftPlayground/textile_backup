@@ -24,7 +24,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
 import net.szum123321.textile_backup.TextileBackup;
 import net.szum123321.textile_backup.TextileLogger;
 import net.szum123321.textile_backup.config.ConfigHelper;
@@ -58,10 +57,8 @@ public class Utilities {
 		return 	((MinecraftServerSessionAccessor)server).getSession().getDirectoryName();
 	}
 
-	public static Path getWorldFolder(MinecraftServer server) {
-		return ((MinecraftServerSessionAccessor)server)
-				.getSession()
-				.getWorldDirectory(World.OVERWORLD);
+	public static Path getRootFolder() {
+		return Path.of(config.get().rootDirectoryPath);
 	}
 
 	public static void deleteDirectory(Path path) throws IOException {

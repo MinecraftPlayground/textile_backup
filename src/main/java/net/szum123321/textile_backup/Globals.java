@@ -118,7 +118,7 @@ public class Globals {
         disableTMPFiles = false;
         Path tmp_dir = Path.of(System.getProperty("java.io.tmpdir"));
         if(
-                FileUtils.sizeOfDirectory(Utilities.getWorldFolder(server).toFile()) >=
+                FileUtils.sizeOfDirectory(Utilities.getRootFolder().toFile()) >=
                         tmp_dir.toFile().getUsableSpace()
         ) {
             log.error("Not enough space left in TMP directory! ({})", tmp_dir);
