@@ -64,6 +64,10 @@ public class ConfigPOJO implements ConfigData {
     @ConfigEntry.Category("Restore")
     public boolean backupOldWorlds = true;
 
+    @Comment("\nA path to the root folder\n")
+    @ConfigEntry.Gui.NoTooltip()
+    public String rootDirectoryPath = "./";
+
     @Comment("\nA path to the backup folder\n")
     @SerializedName("path")
     @ConfigEntry.Gui.NoTooltip()

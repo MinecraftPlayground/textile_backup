@@ -64,6 +64,13 @@ public class Utilities {
 				.getWorldDirectory(World.OVERWORLD);
 	}
 
+	public static Path getRootFolder(MinecraftServer server) {
+		return Path.of(((MinecraftServerSessionAccessor)server)
+				.getSession()
+				.getDirectory()
+				.getRootPath());
+	}
+
 	public static void deleteDirectory(Path path) throws IOException {
 		Files.walkFileTree(path, new SimplePathVisitor() {
 			@Override
