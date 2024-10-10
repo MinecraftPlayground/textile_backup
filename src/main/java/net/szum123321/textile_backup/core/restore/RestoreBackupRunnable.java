@@ -32,13 +32,10 @@ import net.szum123321.textile_backup.core.restore.decompressors.ZipDecompressor;
 import net.szum123321.textile_backup.mixin.MinecraftServerSessionAccessor;
 
 import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.concurrent.FutureTask;
-import java.util.stream.Stream;
 
 /**
  * This class restores a file provided by RestoreContext.
@@ -132,9 +129,8 @@ public class RestoreBackupRunnable implements Runnable {
                 ((MinecraftServerSessionAccessor) ctx.server()).getSession().close();
             
                                 
-                // TODO: BIG PROBLEM!
-                // Utilities.deleteDirectory(rootPath);
-                Files.move(tmp, rootPath, StandardCopyOption.REPLACE_EXISTING);
+                Utilities.deleteDirectory(rootPath);
+                Files.move(tmp, rootPath);
 
                 if (config.get().deleteOldBackupAfterRestore) {
                     log.info("Deleting restored backup file");

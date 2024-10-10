@@ -38,6 +38,7 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 public class Utilities {
 	private final static ConfigHelper config = ConfigHelper.INSTANCE;
@@ -61,17 +62,21 @@ public class Utilities {
 		return Path.of(config.get().rootDirectoryPath);
 	}
 
-	public static void deleteDirectory(Path path) throws IOException {
-		Files.walkFileTree(path, new SimplePathVisitor() {
+	public static void deleteDirectory(Path inputPath) throws IOException {
+		Files.walkFileTree(inputPath, new SimplePathVisitor() {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-				Files.delete(file);
+				if (Utilities.isWhitelisted(inputPath.relativize(file))) {
+					Files.delete(file);
+				}
 				return FileVisitResult.CONTINUE;
 			}
 
 			@Override
 			public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-				Files.delete(dir);
+				if (Utilities.isWhitelisted(inputPath.relativize(dir))) {
+					Files.delete(dir);
+				}
 				return FileVisitResult.CONTINUE;
 			}
 		});
