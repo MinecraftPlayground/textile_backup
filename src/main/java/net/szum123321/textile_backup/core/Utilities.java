@@ -63,25 +63,37 @@ public class Utilities {
 	}
 
 	public static void deleteDirectory(Path inputPath) throws IOException {
-		Files.walkFileTree(inputPath, new SimplePathVisitor() {
-			@Override
-			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-				if (Utilities.isWhitelisted(inputPath.relativize(file))) {
-					log.info("Deleting: ", file.toString());
-					Files.delete(file);
-				}
-				return FileVisitResult.CONTINUE;
-			}
+		try (Stream<Path> fileStream = Files.walk(inputPath)) {
+			var fileList = fileStream
+				.filter(path -> Utilities.isWhitelisted(inputPath.relativize(path)))
+				.filter(Files::isRegularFile)
+				.toList();
 
-			@Override
-			public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-				if (Files.list(dir).count() == 0 && Utilities.isWhitelisted(inputPath.relativize(dir))) {
-					log.info("Deleting: ", dir.toString());
-					Files.delete(dir);
-				}
-				return FileVisitResult.CONTINUE;
+			for (Path file : fileList) {
+				log.info("Deleting: " + file.toString());
+				Files.delete(file);
 			}
-		});
+		}
+
+		// Files.walkFileTree(inputPath, new SimplePathVisitor() {
+		// 	@Override
+		// 	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+		// 		if (Utilities.isWhitelisted(inputPath.relativize(file))) {
+		// 			log.info("Deleting: " + file.toString());
+		// 			Files.delete(file);
+		// 		}
+		// 		return FileVisitResult.CONTINUE;
+		// 	}
+
+		// 	@Override
+		// 	public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+		// 		if (Utilities.isWhitelisted(inputPath.relativize(dir))) {
+		// 			log.info("Deleting: " + dir.toString());
+		// 			Files.delete(dir);
+		// 		}
+		// 		return FileVisitResult.CONTINUE;
+		// 	}
+		// });
 	}
 
 	public static void disableWorldSaving(MinecraftServer server) {
