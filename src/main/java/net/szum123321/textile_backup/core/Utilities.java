@@ -67,7 +67,7 @@ public class Utilities {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 				if (Utilities.isWhitelisted(inputPath.relativize(file))) {
-					log.info(file.toString());
+					log.info("Deleting: ", file.toString());
 					Files.delete(file);
 				}
 				return FileVisitResult.CONTINUE;
@@ -75,8 +75,8 @@ public class Utilities {
 
 			@Override
 			public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-				if (Utilities.isWhitelisted(inputPath.relativize(dir))) {
-					log.info(dir.toString());
+				if (Files.list(dir).count() == 0 && Utilities.isWhitelisted(inputPath.relativize(dir))) {
+					log.info("Deleting: ", dir.toString());
 					Files.delete(dir);
 				}
 				return FileVisitResult.CONTINUE;
