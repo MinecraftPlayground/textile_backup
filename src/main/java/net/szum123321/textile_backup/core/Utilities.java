@@ -66,6 +66,7 @@ public class Utilities {
 		Files.walkFileTree(inputPath, new SimplePathVisitor() {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				log.info(file.toString());
 				if (Utilities.isWhitelisted(inputPath.relativize(file))) {
 					Files.delete(file);
 				}
@@ -74,6 +75,7 @@ public class Utilities {
 
 			@Override
 			public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+				log.info(dir.toString());
 				if (Utilities.isWhitelisted(inputPath.relativize(dir))) {
 					Files.delete(dir);
 				}
